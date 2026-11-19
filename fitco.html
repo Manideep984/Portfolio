@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FitCo case study | Manideep Gostu</title><meta name="description" content="FitCo: a calorie app built around one question. A full UX process from research to prototype.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body class="plain">
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="index.html">Manideep Gostu</a>
+  <ul><li><a class="link" href="index.html#work">My Work</a></li><li><a class="link" href="index.html#experience">Experience</a></li><li><a class="link" href="https://drive.google.com/file/d/1lk64tgQct_yPAMCGnlm1fvzuZqLw3ZTP/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li><li><a class="link" href="#contact">Contact</a></li></ul>
+</div></nav>
+
+<header class="cs-hero dark"><div class="wrap">
+  <div class="txt"><h1>FitCo</h1><p class="role">Role: UI/UX &amp; Product Designer</p><p class="lede">What should I eat with the calories I have left today?</p></div>
+  <div class="blobwrap"><div class="blob"></div><img class="phone" src="images/hifi-welcome.png" alt="FitCo welcome screen with Dr. Bamboo"></div>
+</div></header>
+<section class="cs metabar"><div class="wrap"><dl class="meta">
+  <div><dt>Role</dt><dd>Everything: research, UX, UI</dd></div><div><dt>Type</dt><dd>Personal project, mobile app</dd></div>
+  <div><dt>Tools</dt><dd>Figma, FigJam, Adobe Photoshop, Webflow</dd></div><div><dt>Status</dt><dd>Prototype built</dd></div>
+</dl></div></section>
+
+<section class="cs"><div class="wrap">
+  <h2>How the problem was found</h2>
+  <p>I started dieting in 2023. I used ChatGPT to work out calories and macros, and after a while I got bored of eating the same meals. So I started asking it one thing: <em>"I have this many calories left, <span style="white-space:nowrap">what should I eat?"</span></em></p>
+  <p>That worked well in a chat. But every calorie app I knew was built around logging what I already ate. I wanted the answer to that question inside the app, on the home screen.</p>
+  <h2 style="margin-top:56px">Problem statement</h2>
+  <p>People who track calories can log what they ate, but nothing in the app tells them what to eat with what is left. FitCo shows what is left today, suggests food that fits, and says why.</p>
+</div></section>
+
+<section class="cs" style="padding-top:20px"><div class="wrap">
+  <h2>The core screens</h2>
+  <div class="bento key">
+    <div class="cell kscr home"><span class="lab">Home</span><span class="sub2">The answer comes first: calories left, then what to eat.</span><span class="dev"><img src="images/hifi-home.png" alt="FitCo home screen"></span></div>
+    <div class="cell kscr sug"><span class="lab">Suggestions</span><span class="sub2">Ranked by what fits.</span><span class="dev"><img src="images/hifi-suggestions.png" alt="FitCo suggestions screen"></span></div>
+    <div class="cell kscr meal"><span class="lab">Meal detail</span><span class="sub2">With a reason it fits.</span><span class="dev"><img src="images/hifi-meal.png" alt="FitCo meal detail screen"></span></div>
+  </div>
+</div></section>
+
+<section class="cs band-lime"><div class="wrap">
+  <h2>Who I talked to</h2>
+  <p>A small group, each close to the kind of person FitCo is for.</p>
+  <div class="pstack deck">
+    <figure class="pcard-img c1"><img src="images/people/vineeth-card.jpg" alt="Vineeth persona card"></figure>
+    <figure class="pcard-img c2"><img src="images/people/charan-card.jpg" alt="Charan persona card"></figure>
+    <figure class="pcard-img c3"><img src="images/people/akshaya-card.jpg" alt="Akshaya persona card"></figure>
+  </div>
+</div></section>
+
+<section class="cs al-left"><div class="wrap">
+  <h2>What already exists</h2>
+  <p>I looked at three apps people commonly use: MyFitnessPal, MacroFactor and Yazio. I compared positioning, brand, pricing (mid-2026), how each answers "what should I eat?", how logging works, and common complaints.</p>
+  <figure class="shot wide zoom"><img src="images/fitco-teardown.jpg" alt="Competitive teardown table"></figure>
+  <p class="bolder" style="margin-top:26px">None of the three leads with what fits in what is left today, and why. That is the gap I am designing for. It is a hypothesis from reading three apps, not a proven fact.</p>
+</div></section>
+
+<section class="cs al-right band-amber"><div class="wrap">
+  <h2>Card sort</h2>
+  <p>I wrote 19 features on cards and asked Vineeth and Charan to group them in their own words, separately.</p>
+  <div class="bento sortgrid">
+    <div class="cell"><h3>Where they agreed</h3><ul><li>Logging a meal, calories remaining and macros belong together.</li><li>Goal and personal details belong together.</li><li>Getting, filtering and adding a suggestion belong together.</li></ul></div>
+    <div class="cell"><h3>Where they differed</h3><ul><li>Vineeth grouped by task: tracking, setting up, suggestions.</li><li>Charan grouped by frequency: things used daily, things for later, data creation.</li><li>Past meals, delete and totals felt like "later" to Charan but part of tracking to Vineeth.</li></ul></div>
+    <div class="cell span2 pad0"><figure class="shot zoom" style="margin:0"><img src="images/fitco-cardsort.jpg" alt="FigJam card sort board"><figcaption style="padding:0 0 6px">The card sort board in FigJam.</figcaption></figure></div>
+    <div class="cell span2 mint"><h3>So I decided</h3><p>Home holds the daily trio: log, remaining, macros. Suggestions get their own place. Setup happens once. History and analytics wait for a later version.</p></div>
+  </div>
+</div></section>
+
+<section class="cs al-left"><div class="wrap">
+  <h2>Structure and flow</h2>
+  <p>From the card sort I drew an app map and one main flow, then added the cases where things go wrong: over your calories, filters that match nothing, nothing logged yet, no connection and a page that does not exist.</p>
+  <p class="quiet" style="margin-top:10px">Click the image to read it up close.</p>
+  <figure class="shot wide zoom"><img src="images/fitco-ia.jpg" alt="Flows and information architecture"></figure>
+</div></section>
+
+<section class="cs al-right band-wire"><div class="wrap">
+  <h2>Wireframes</h2>
+  <p>I sketch first because it is quick to change. The first version was a class assignment with ten screens, including onboarding, history and analytics. After the card sort I cut it down to what the question needs, and added screens for empty, error and over-calories states.</p>
+  <figure class="shot wide zoom flowimg"><img src="images/fitco-wf-flow.jpg" alt="All ten wireframes in one line, connected by the taps between them"><figcaption class="side cap1">Blue outline: the button you tap. The wire goes to the screen it opens.</figcaption></figure>
+</div></section>
+
+<section class="cs al-left"><div class="wrap">
+  <h2>Design system</h2>
+  <p>Twelve colors, each with one job. Fraunces for headings and Hanken Grotesk for numbers and text. Spacing and radius tokens, so every screen follows the same steps.</p>
+  <p style="margin-top:12px">Components come with real states: buttons and chips (default, pressed, disabled), tags, progress, macro stats and a message card.</p>
+  <figure class="shot wide zoom"><img src="images/fitco-design-system.jpg" alt="FitCo design system"></figure>
+</div></section>
+
+<section class="cs"><div class="wrap">
+  <h2>High-fidelity screens</h2>
+  <p>Screens built from the components and tokens above. Sample day: 1,180 kcal left of 2,000, with a veg pulao and raita suggestion at 430 kcal.</p>
+  <div class="screens dv">
+    <figure class="shot"><span class="dev"><img src="images/hifi-welcome.png" alt="Welcome"></span><figcaption>Welcome</figcaption></figure>
+    <figure class="shot"><span class="dev"><img src="images/hifi-home.png" alt="Home"></span><figcaption>Home</figcaption></figure>
+    <figure class="shot"><span class="dev"><img src="images/hifi-suggestions.png" alt="Suggestions"></span><figcaption>Suggestions</figcaption></figure>
+    <figure class="shot"><span class="dev"><img src="images/hifi-meal.png" alt="Meal detail"></span><figcaption>Meal detail</figcaption></figure>
+  </div>
+  <h2 style="margin-top:80px">Flow</h2>
+  <figure class="shot wide zoom flowimg"><img src="images/fitco-flow-main.jpg" alt="FitCo prototype flow: Welcome, Home, Suggestions, Meal detail, After adding, connected by the taps that move between them"><figcaption>Click to enlarge.</figcaption></figure>
+  <div class="actions" style="margin-top:30px;display:flex;justify-content:center"><a class="btn fill" href="https://www.figma.com/design/q3QUDHP8G08RWj0zzKJXKQ/fitco?m=auto&amp;t=LvOeQhYHyke9QBOM-1" target="_blank" rel="noopener">Open the prototype in Figma</a></div>
+  <h2 style="margin-top:80px">The small moments</h2>
+  <p>Error and empty states are where an app feels friendly or cold, so I designed them on purpose.</p>
+  <div class="screens dv rise">
+    <figure class="shot"><span class="dev"><img src="images/hifi-over.png" alt="Over your calories"></span><figcaption>Over your calories: "180 kcal over today's goal" with the choice to make it a cheat day or pick something lighter. No mascot here, just a quiet note.</figcaption></figure>
+    <figure class="shot"><span class="dev"><img src="images/hifi-offline.png" alt="Offline"></span><figcaption>Offline: a banner, not a blocker. Meals are saved on the phone and sync later.</figcaption></figure>
+    <figure class="shot"><span class="dev"><img src="images/hifi-notfound.png" alt="Page not found"></span><figcaption>Page not found: one button back home.</figcaption></figure>
+    <figure class="shot"><span class="dev"><img src="images/hifi-loading.png" alt="Loading"></span><figcaption>Loading: Dr. Bamboo checks what fits in your 1,180 calories left.</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="cs"><div class="wrap">
+  <h3 class="kick">Meet the mascot</h3>
+  <h2 class="bigname">Dr. Bamboo</h2>
+  <p style="max-width:36em">A calm panda doctor who walks with you through FitCo. He cheers when you log a meal, jokes lightly when you overshoot, never shames, and turns up when a screen is empty, lost or loading. Here he is in different moods. Drag them around.</p>
+  <div class="board stickers" id="stickers">
+    <div class="pin sticker" style="left:3%;top:6%;width:16%;--r:-8deg;--d:.05s"><img src="images/dr-bamboo-wave.png" alt="Dr. Bamboo waving"></div>
+    <div class="pin sticker" style="left:21%;top:3%;width:16%;--r:5deg;--d:.12s"><img src="images/dr-bamboo-thumbs-up.png" alt="Dr. Bamboo thumbs up"></div>
+    <div class="pin sticker" style="left:40%;top:8%;width:17%;--r:-4deg;--d:.19s"><img src="images/dr-bamboo-empty-plate.png" alt="Dr. Bamboo with an empty plate"></div>
+    <div class="pin sticker" style="left:60%;top:4%;width:16%;--r:7deg;--d:.26s"><img src="images/dr-bamboo-searching.png" alt="Dr. Bamboo searching"></div>
+    <div class="pin sticker" style="left:79%;top:10%;width:16%;--r:-6deg;--d:.33s"><img src="images/dr-bamboo-goal.png" alt="Dr. Bamboo goal reached"></div>
+    <div class="pin sticker" style="left:5%;top:52%;width:16%;--r:6deg;--d:.4s"><img src="images/dr-bamboo-lost.png" alt="Dr. Bamboo lost"></div>
+    <div class="pin sticker" style="left:23%;top:48%;width:18%;--r:-5deg;--d:.47s"><img src="images/dr-bamboo-offline.png" alt="Dr. Bamboo offline"></div>
+    <div class="pin sticker" style="left:44%;top:52%;width:18%;--r:4deg;--d:.54s"><img src="images/dr-bamboo-loading.png" alt="Dr. Bamboo loading"></div>
+    <div class="pin sticker" style="left:65%;top:50%;width:14%;--r:-7deg;--d:.61s"><img src="images/dr-bamboo-tip.png" alt="Dr. Bamboo with a tip"></div>
+    <div class="pin sticker" style="left:81%;top:55%;width:14%;--r:5deg;--d:.68s"><img src="images/dr-bamboo-hydrate.png" alt="Dr. Bamboo hydrating"></div>
+  </div>
+</div></section>
+
+<div class="wrap"><div class="next"><a href="index.html">&larr; All work</a><a href="viva.html">VIVA &rarr;</a></div></div>
+<footer class="foot" id="contact"><div class="wrap">
+  <div><h2>Let's talk.</h2><p class="fname">Manideep Gostu</p><div class="social"><a href="https://www.linkedin.com/in/manideep-guptha-gostu" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9.75h4v11.5H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.84-2.05 3.8-2.05 4.07 0 4.84 2.68 4.84 6.16v5.8h-4v-5.15c0-1.23-.02-2.8-1.7-2.8-1.71 0-1.97 1.33-1.97 2.7v5.25h-4z"/></svg></a><a href="https://www.instagram.com/iam_manideep984/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.5 2h9A5.5 5.5 0 0122 7.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm0 2A3.5 3.5 0 004 7.5v9A3.5 3.5 0 007.5 20h9a3.5 3.5 0 003.5-3.5v-9A3.5 3.5 0 0016.5 4zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm5.3-3.2a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg></a><a href="mailto:manideepguptha984@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm9 7.2L4.5 7v.01L12 12.2 19.5 7H4.5z"/></svg></a></div></div>
+  <div class="fphoto"><img src="images/me/4.jpg" alt="Manideep laughing by the Chicago River"></div>
+</div></footer>
+<script src="script.js"></script></body></html>
