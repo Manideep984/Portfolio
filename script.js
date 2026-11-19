@@ -67,12 +67,31 @@ ov.addEventListener('click',function(e){if(e.target===oi)return;closez()});
 addEventListener('keydown',function(e){if(e.key==='Escape')closez()});
 })();
 
-/* workbench dot grid: dots swell near the cursor, loop runs only while they ease back */
-(function(){var h=document.querySelector('.hero'),cv=h&&h.querySelector('canvas.dots');if(!cv)return;var x=cv.getContext('2d'),G=28,R=150,mx=-999,my=-999,inf=0,run=false,w=0,hh=0,still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function size(){var d=Math.min(window.devicePixelRatio||1,2);w=h.clientWidth;hh=h.clientHeight;cv.width=w*d;cv.height=hh*d;x.setTransform(d,0,0,d,0,0);draw()}
-function draw(){x.clearRect(0,0,w,hh);x.fillStyle='rgba(70,58,44,.34)';for(var j=G/2;j<hh;j+=G)for(var i=G/2;i<w;i+=G){var r=1.25;if(inf>0){var dx=i-mx,dy=j-my,dd=Math.sqrt(dx*dx+dy*dy);if(dd<R){var k=1-dd/R;r+=3.4*k*k*inf}}x.beginPath();x.arc(i,j,r,0,6.2832);x.fill()}}
+/* workbench dot grid: dots swell and a soft glow follows the cursor, except over the intro text.
+   The loop runs only while things ease in or out. */
+(function(){var h=document.querySelector('.hero'),cv=h&&h.querySelector('canvas.dots');if(!cv)return;var x=cv.getContext('2d'),gl=document.createElement('canvas'),G=28,R=160,mx=-999,my=-999,inf=0,run=false,w=0,hh=0,tr=null,still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function rect(){var t=h.querySelector('.wrap>div'),b=h.getBoundingClientRect();if(!t){tr=null;return}var r=t.getBoundingClientRect(),p=18;tr={l:r.left-b.left-p,t:r.top-b.top-p,r:r.right-b.left+p,b:r.bottom-b.top+p}}
+function inT(i,j){return tr&&i>tr.l&&i<tr.r&&j>tr.t&&j<tr.b}
+function size(){var d=Math.min(window.devicePixelRatio||1,2);w=h.clientWidth;hh=h.clientHeight;cv.width=w*d;cv.height=hh*d;gl.width=cv.width;gl.height=cv.height;x.setTransform(d,0,0,d,0,0);rect();draw()}
+function draw(){x.clearRect(0,0,w,hh);
+ if(inf>0.01&&mx>-900){var gc=gl.getContext('2d');gc.setTransform(1,0,0,1,0,0);gc.clearRect(0,0,gl.width,gl.height);gc.setTransform(cv.width/w,0,0,cv.height/hh,0,0);
+  var g=gc.createRadialGradient(mx,my,0,mx,my,R*1.5);g.addColorStop(0,'rgba(255,214,102,'+(.34*inf)+')');g.addColorStop(.5,'rgba(255,170,150,'+(.14*inf)+')');g.addColorStop(1,'rgba(150,190,255,0)');gc.fillStyle=g;gc.fillRect(mx-R*1.5,my-R*1.5,R*3,R*3);
+  if(tr){gc.globalCompositeOperation='destination-out';gc.filter='blur(14px)';gc.fillStyle='#000';gc.fillRect(tr.l,tr.t,tr.r-tr.l,tr.b-tr.t);gc.filter='none';gc.globalCompositeOperation='source-over'}
+  x.save();x.setTransform(1,0,0,1,0,0);x.drawImage(gl,0,0);x.restore()}
+ for(var j=G/2;j<hh;j+=G)for(var i=G/2;i<w;i+=G){var r=1.25,a=.34;if(inT(i,j))a=.12;else if(inf>0){var dx=i-mx,dy=j-my,dd=Math.sqrt(dx*dx+dy*dy);if(dd<R){var k=1-dd/R;r+=3.4*k*k*inf;a+=.2*k*inf}}x.fillStyle='rgba(70,58,44,'+a+')';x.beginPath();x.arc(i,j,r,0,6.2832);x.fill()}}
 function tick(){if(mx>-900||inf>0.01){inf+=((mx>-900?1:0)-inf)*0.14;draw();requestAnimationFrame(tick)}else{inf=0;run=false;draw()}}
 function kick(){if(!run&&!still){run=true;requestAnimationFrame(tick)}}
 window.addEventListener('pointermove',function(e){var b=h.getBoundingClientRect();if(e.clientY<b.top||e.clientY>b.bottom){mx=-999;kick();return}mx=e.clientX-b.left;my=e.clientY-b.top;kick()},{passive:true});
 document.addEventListener('pointerleave',function(){mx=-999;kick()});
-window.addEventListener('resize',size);size()})();
+window.addEventListener('resize',size);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);size()})();
+
+/* pull cord next to the name: drag it down, let go, it springs back and takes you to the top */
+(function(){var c=document.querySelector('.cord'),b=document.querySelector('.brand');if(!c||!b)return;
+function place(){c.style.left=(b.offsetLeft+b.offsetWidth+18)+'px'}place();window.addEventListener('resize',place);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
+var sy=0,on=false,dy=0;
+function top(){window.scrollTo({top:0,behavior:'smooth'})}
+c.addEventListener('pointerdown',function(e){on=true;sy=e.clientY;dy=0;c.setPointerCapture(e.pointerId);c.classList.add('pull');e.preventDefault()});
+c.addEventListener('pointermove',function(e){if(!on)return;dy=Math.max(0,Math.min(72,(e.clientY-sy)*.85));c.style.setProperty('--pull',dy+'px')});
+function end(){if(!on)return;on=false;c.classList.remove('pull');var go=dy>30;dy=0;c.style.setProperty('--pull','0px');if(go)top()}
+c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end);
+c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();c.classList.remove('pull');c.style.setProperty('--pull','40px');setTimeout(function(){c.style.setProperty('--pull','0px')},120);top()}})})();
