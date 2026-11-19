@@ -55,8 +55,6 @@ document.querySelectorAll('.board').forEach(function(b){
   var mv=0;p.addEventListener('pointermove',function(e){if(on)mv=Math.max(mv,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy))});
   function up(){var go=on&&mv<6&&p.dataset.href;on=false;p.classList.remove('drag');mv=0;if(go)location.href=p.dataset.href}p.addEventListener('pointerup',up);p.addEventListener('pointercancel',function(){on=false;p.classList.remove('drag')});
   if(p.dataset.href)p.addEventListener('keydown',function(e){if(e.key==='Enter')location.href=p.dataset.href})})});
-/* ruler numerals on the hero mat */
-(function(){var h=document.querySelector('.hero');if(!h)return;var t=h.querySelector('.mat-r.top'),l=h.querySelector('.mat-r.left');if(!t)return;function build(){t.innerHTML='';l.innerHTML='';for(var x=200,i=5;x<h.clientWidth;x+=200,i+=5){var a=document.createElement('i');a.textContent=i;a.style.left=x+'px';t.appendChild(a)}for(var y=200,k=5;y<h.clientHeight;y+=200,k+=5){var b=document.createElement('i');b.textContent=k;b.style.top=y+'px';l.appendChild(b)}}build();addEventListener('resize',build)})();
 
 /* ---------- click to enlarge ---------- */
 var ov=document.createElement('div');ov.id='zoomov';ov.innerHTML='<button type="button" aria-label="Close">Close</button><img alt="">';document.body.appendChild(ov);

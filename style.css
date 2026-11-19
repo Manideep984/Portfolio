@@ -493,3 +493,37 @@ body:not(.plain){background:transparent}
 .mat-r.left i{display:none}
 .matdeco{stroke:rgba(255,255,255,.16)}
 .hero .hint{bottom:10px}
+
+/* ===== v16 home: paper-roll hero, chalkboard, small skill chips, VIVA stamp ===== */
+.hero{color:var(--ink);background:#f1f0ec url(images/paper-roll.gif) center/cover no-repeat;box-shadow:none;padding:56px 0 80px}
+.hero .hey,.hero .here{color:var(--ink)}.hero .hey{opacity:1}
+.hero p{color:var(--ink2)}
+.hero .btn{border-color:var(--ink);color:var(--ink);background:transparent}
+.hero .btn.fill{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hero .hint{color:#f3e9d8;bottom:9px;right:22px;z-index:5;font-size:12.5px}
+.hero #board{position:relative;height:680px;overflow:hidden;border-radius:8px;box-sizing:border-box;border:16px solid #9a6636;border-color:#ad7842 #96632f #84552a #96632f;
+ background:radial-gradient(120% 90% at 30% 20%,#33473d,#243229 70%,#1c2822);box-shadow:0 26px 40px -22px rgba(0,0,0,.55)}
+.hero #board::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='460'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008 .035' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.5 -.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") center/cover;box-shadow:inset 0 0 70px rgba(0,0,0,.55)}
+.tray{position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(#a56e3d,#8a5a2f 60%,#6f4624);box-shadow:0 -2px 0 rgba(255,255,255,.14) inset,0 -8px 14px -8px rgba(0,0,0,.5);pointer-events:none}
+.chalk{position:absolute;bottom:34px;height:9px;border-radius:3px;box-shadow:0 2px 2px rgba(0,0,0,.35)}
+.chalk.c1{left:6%;width:46px;background:#f4f4ef;rotate:-4deg}
+.chalk.c2{left:6%;margin-left:56px;width:30px;background:#ffe27a;rotate:3deg}
+.chalk.c3{left:6%;margin-left:96px;width:38px;background:#ff9db8;rotate:-2deg}
+.duster{position:absolute;bottom:30px;left:6%;margin-left:152px;width:74px;height:26px;border-radius:5px 5px 3px 3px;rotate:2deg;background:linear-gradient(#5d5b56 0 58%,#b78549 58%);box-shadow:0 3px 3px rgba(0,0,0,.4)}
+.duster::before{content:"";position:absolute;left:4px;right:4px;top:-3px;height:8px;border-radius:5px;background:#7a786f}
+.duster::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.45),transparent 40%),radial-gradient(circle at 75% 20%,rgba(255,255,255,.3),transparent 35%)}
+.hero .pin.photo{box-shadow:0 14px 22px -10px rgba(0,0,0,.65)}
+@media (max-width:900px){.hero #board{height:520px}.tray{height:38px}}
+/* what I do: small chips */
+.about{padding:10px 0 70px}
+.about h2{font-size:clamp(26px,3vw,34px);margin-bottom:18px}
+.do{gap:10px}
+.do span{font-size:15px;font-weight:500;letter-spacing:0;padding:8px 15px;border-radius:10px;border:1.5px solid var(--ink);background:rgba(255,255,255,.6)}
+.do span:hover{transform:rotate(-2deg) translateY(-2px)}
+.bigall{font-size:clamp(26px,3.2vw,40px);line-height:1.1;letter-spacing:-.03em;margin-top:34px}
+.bigall small{font-size:clamp(15px,1.4vw,18px);margin-top:8px}
+/* VIVA stamp */
+.card .art.viva{position:relative}
+.stamp{position:absolute;left:50%;top:50%;translate:-50% -50%;rotate:-12deg;z-index:3;padding:9px 22px;border-radius:16px;border:3px solid #c8201f;color:#c8201f;font:700 clamp(15px,2vw,22px)/1 var(--f);letter-spacing:.14em;white-space:nowrap;box-shadow:inset 0 0 0 3px rgba(255,255,255,0),0 0 0 2px rgba(200,32,31,.0);background:rgba(255,255,255,.55);opacity:.92;mix-blend-mode:multiply}
+.stamp::before{content:"";position:absolute;inset:3px;border:1.5px solid #c8201f;border-radius:11px}
+.stamp{background:#fff4ee;mix-blend-mode:normal;opacity:1;font-size:clamp(17px,2.3vw,26px);padding:12px 26px;box-shadow:0 6px 14px -6px rgba(120,20,20,.45)}
