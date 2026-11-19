@@ -549,3 +549,11 @@ body:not(.plain){background:transparent}
 #work{position:relative;isolation:isolate}
 #work .paper{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;pointer-events:none;-webkit-mask-image:linear-gradient(transparent,#000 24%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 24%,#000 82%,transparent)}
 @media (prefers-reduced-motion:reduce){#work .paper{display:none}}
+
+/* v19: cord sits before the name and sways; scrolling gives it a push */
+@media (min-width:521px){.nav .brand{margin-left:26px}}
+.cord{transform-origin:50% 0;rotate:var(--ang,0deg)}
+.cord .in{display:block;transform-origin:50% 0;animation:idle 4.6s ease-in-out infinite}
+@keyframes idle{0%,100%{rotate:-2.4deg}50%{rotate:2.4deg}}
+.cord.pull .in{animation:none}
+@media (prefers-reduced-motion:reduce){.cord .in{animation:none}}

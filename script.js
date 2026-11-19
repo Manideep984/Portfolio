@@ -87,8 +87,10 @@ window.addEventListener('resize',size);if(document.fonts&&document.fonts.ready)d
 
 /* pull cord next to the name: drag it down, let go, it springs back and takes you to the top */
 (function(){var c=document.querySelector('.cord'),b=document.querySelector('.brand');if(!c||!b)return;
-function place(){c.style.left=(b.offsetLeft+b.offsetWidth+18)+'px'}place();window.addEventListener('resize',place);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
-var sy=0,on=false,dy=0;
+function place(){c.style.left=(b.offsetLeft-14)+'px'}place();window.addEventListener('resize',place);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
+var sy=0,on=false,dy=0,ang=0,vel=0,sw=false,lastY=window.scrollY,calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function swing(){vel+=-0.014*ang-0.035*vel;ang+=vel;c.style.setProperty('--ang',ang.toFixed(2)+'deg');if(Math.abs(ang)<0.04&&Math.abs(vel)<0.04){ang=0;vel=0;c.style.setProperty('--ang','0deg');sw=false}else requestAnimationFrame(swing)}
+window.addEventListener('scroll',function(){var y=window.scrollY,d=y-lastY;lastY=y;if(calm||on)return;vel+=Math.max(-2.2,Math.min(2.2,d*0.05));if(!sw){sw=true;requestAnimationFrame(swing)}},{passive:true});
 function top(){window.scrollTo({top:0,behavior:'smooth'})}
 c.addEventListener('pointerdown',function(e){on=true;sy=e.clientY;dy=0;c.setPointerCapture(e.pointerId);c.classList.add('pull');e.preventDefault()});
 c.addEventListener('pointermove',function(e){if(!on)return;dy=Math.max(0,Math.min(72,(e.clientY-sy)*.85));c.style.setProperty('--pull',dy+'px')});
