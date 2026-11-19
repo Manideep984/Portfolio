@@ -66,3 +66,13 @@ document.querySelectorAll('figure.zoom').forEach(function(f){f.tabIndex=0;f.setA
 ov.addEventListener('click',function(e){if(e.target===oi)return;closez()});
 addEventListener('keydown',function(e){if(e.key==='Escape')closez()});
 })();
+
+/* workbench dot grid: dots swell near the cursor, loop runs only while they ease back */
+(function(){var h=document.querySelector('.hero'),cv=h&&h.querySelector('canvas.dots');if(!cv)return;var x=cv.getContext('2d'),G=28,R=150,mx=-999,my=-999,inf=0,run=false,w=0,hh=0,still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function size(){var d=Math.min(window.devicePixelRatio||1,2);w=h.clientWidth;hh=h.clientHeight;cv.width=w*d;cv.height=hh*d;x.setTransform(d,0,0,d,0,0);draw()}
+function draw(){x.clearRect(0,0,w,hh);x.fillStyle='rgba(70,58,44,.34)';for(var j=G/2;j<hh;j+=G)for(var i=G/2;i<w;i+=G){var r=1.25;if(inf>0){var dx=i-mx,dy=j-my,dd=Math.sqrt(dx*dx+dy*dy);if(dd<R){var k=1-dd/R;r+=3.4*k*k*inf}}x.beginPath();x.arc(i,j,r,0,6.2832);x.fill()}}
+function tick(){if(mx>-900||inf>0.01){inf+=((mx>-900?1:0)-inf)*0.14;draw();requestAnimationFrame(tick)}else{inf=0;run=false;draw()}}
+function kick(){if(!run&&!still){run=true;requestAnimationFrame(tick)}}
+window.addEventListener('pointermove',function(e){var b=h.getBoundingClientRect();if(e.clientY<b.top||e.clientY>b.bottom){mx=-999;kick();return}mx=e.clientX-b.left;my=e.clientY-b.top;kick()},{passive:true});
+document.addEventListener('pointerleave',function(){mx=-999;kick()});
+window.addEventListener('resize',size);size()})();
